@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 71984256b1cef2b44a2c2c1f2d669559
+timeCreated: 1497628874
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: r0c0i Linotte
+  fontNames:
+  - r0c0i Linotte
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 5c8739664cea5e14ab1dae0cb030d4ff, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
