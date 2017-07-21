@@ -18,30 +18,47 @@ public class SoundManager : MonoBehaviour {
 		ins = this;
 	}
 	void Start () {
+		setBG ();
+	}
+
+	public void setBG(){
 		if (PlayerPrefs.GetInt ("ISMUTEBG") == 0) {
 			bgMusic.volume = 1;
 		} else {
 			bgMusic.volume = 0;
 		}
 	}
-	
+
 	public void playFlySound(){
-		audioSource.PlayOneShot (flySound, 1);
+		if (PlayerPrefs.GetInt ("ISMUTESOUND") == 0) {
+			audioSource.PlayOneShot (flySound, 1);
+		}
 	}
 	public void playBtnClick(){
-		audioSource.PlayOneShot (btnClickSound, 1);
+		if (PlayerPrefs.GetInt ("ISMUTESOUND") == 0) {
+			audioSource.PlayOneShot (btnClickSound, 1);
+		}
 	}
 	public void playReady(){
-		audioSource.PlayOneShot (readySound, 1);
+		if (PlayerPrefs.GetInt ("ISMUTESOUND") == 0) {
+			audioSource.PlayOneShot (readySound, 1);
+		}
 	}
 	public void playCrash(){
-		audioSource.PlayOneShot (crashSound, 1);
+		if (PlayerPrefs.GetInt ("ISMUTESOUND") == 0) {
+			audioSource.PlayOneShot (crashSound, 1);
+		}
 	}
 	public void playDie(){
-		audioSource.PlayOneShot (dieSound, 1);
+		if (PlayerPrefs.GetInt ("ISMUTEBG") == 0) {
+			audioSource.PlayOneShot (dieSound, 1);
+			bgMusic.Stop ();
+		}
 	}
 	public void playNotifi(){
-		audioSource.PlayOneShot (notifiSound, 1);
+		if (PlayerPrefs.GetInt ("ISMUTESOUND") == 0) {
+			audioSource.PlayOneShot (notifiSound, 1);
+		}
 	}
 }
 

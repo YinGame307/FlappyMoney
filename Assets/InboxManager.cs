@@ -118,7 +118,7 @@ public class InboxManager : MonoBehaviour {
 	}
 
 	void onReadSuccess(string res){
-		
+		refresh ();
 	}
 
 	IEnumerator doAPI(string data, Action<string> onSuccess, Action<string> onFailed){

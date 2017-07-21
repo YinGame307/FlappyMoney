@@ -2,11 +2,13 @@
 using UnityEngine;
 using GoogleMobileAds;
 using GoogleMobileAds.Api;
+using UnityEngine.SceneManagement;
 
 public class GoogleAdmob : MonoBehaviour {
 	public static GoogleAdmob admob;
 	private BannerView bannerView;
-	private InterstitialAd interstitial;
+	public static InterstitialAd interstitial;
+	public static bool loadedInter;
 	void Start(){
 //		if(gameObject.name.Equals("_gm")){
 //			RequestBanner();
@@ -14,7 +16,10 @@ public class GoogleAdmob : MonoBehaviour {
 //		}
 		//
 		RequestBanner();
-		RequestInterstitial();
+
+		if (interstitial == null || !interstitial.IsLoaded()) {
+			RequestInterstitial ();
+		}
 	}
 
 	void Awake()
@@ -97,16 +102,15 @@ public class GoogleAdmob : MonoBehaviour {
 	
 	public void ShowInterstitial()
 	{
-		if (interstitial.IsLoaded())
-		{
-			interstitial.Show();
+		if (interstitial.IsLoaded ()) {
 
-		if (PlayerPrefs.GetInt ("CANERNMONEY") == 1) {
-				Player.ins.addCoin ();
+			interstitial.Show ();
+			PlayerPrefs.SetInt ("SHOWADS", 0);
+			if (PlayerPrefs.GetInt ("CANERNMONEY") == 1) {
+				PlayerPrefs.SetInt ("COINWAITTOADD", PlayerPrefs.GetInt ("COINWAITTOADD") + 1);
 			}
-
 			RequestInterstitial ();
-			Debug.Log("Inter");
+			Debug.Log ("Inter");
 		}
 		else
 		{
@@ -158,9 +162,11 @@ public class GoogleAdmob : MonoBehaviour {
 	
 	public void HandleInterstitialLoaded(object sender, EventArgs args)
 	{
+		loadedInter = true;
 		Debug.Log("HandleInterstitialLoaded event received.");
-		//UIManager.ins.log.text = "loaded";
-		//ShowInterstitial ();
+		if (PlayerPrefs.GetInt ("SHOWADS") == 1) {
+			ShowInterstitial ();			
+		}
 	}
 	
 	public void HandleInterstitialFailedToLoad(object sender, AdFailedToLoadEventArgs args)
@@ -172,6 +178,7 @@ public class GoogleAdmob : MonoBehaviour {
 	public void HandleInterstitialOpened(object sender, EventArgs args)
 	{
 		print("HandleInterstitialOpened event received");
+		Time.timeScale = 0;
 	}
 	
 	void HandleInterstitialClosing(object sender, EventArgs args)
@@ -182,6 +189,8 @@ public class GoogleAdmob : MonoBehaviour {
 	public void HandleInterstitialClosed(object sender, EventArgs args)
 	{
 		print("HandleInterstitialClosed event received");
+		Time.timeScale = 1;
+		SceneManager.LoadScene (2);
 	}
 	
 	public void HandleInterstitialLeftApplication(object sender, EventArgs args)

@@ -6,6 +6,7 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 using UnityEngine.SceneManagement;
+using LitJson;
 
 public class Player : MonoBehaviour {
 	public static bool loged;
@@ -35,9 +36,10 @@ public class Player : MonoBehaviour {
 			PlayerPrefs.SetInt ("CANERNMONEY", 0);
 			PlayerPrefs.SetString ("LASTTIME", nowStr);
 		}
-
 		//PlayerPrefs.DeleteAll ();
-		ins = this;
+		if (ins == null) {
+			ins = this;
+		}
 		if (user == null) {
 			user = new User ();
 		}
@@ -51,6 +53,12 @@ public class Player : MonoBehaviour {
 	void Start(){
 		if (SceneManager.GetActiveScene().name.Equals("Main")) {
 			InvokeRepeating ("countTime", 1, 1);
+		}
+		Debug.Log (PlayerPrefs.GetInt ("COINWAITTOADD"));
+		if (loged) {
+			if (PlayerPrefs.GetInt ("COINWAITTOADD") > 0) {
+				addCoin ();
+			}
 		}
 	}
 
@@ -89,9 +97,11 @@ public class Player : MonoBehaviour {
 	}
 
 	public void autoLogin(){
-		loginPopup.SetActive (true);
-		loginPopup.GetComponent<RequestStatus> ().tryAgain = autoLogin;
-		loginPopup.GetComponent<RequestStatus> ().setStatusString("Đang đăng nhập....");
+		if (loginPopup != null) {
+			loginPopup.SetActive (true);
+			//loginPopup.GetComponent<RequestStatus> ().tryAgain = autoLogin;
+			loginPopup.GetComponent<RequestStatus> ().setStatusString ("Đang đăng nhập....");
+		}
 
 		user = LitJson.JsonMapper.ToObject<User> (PlayerPrefs.GetString ("USER"));
 		PostData data = new PostData ("login");
@@ -102,32 +112,52 @@ public class Player : MonoBehaviour {
 	}
 
 	void onLoginSuccess(string res){
-		Debug.Log (res);
-		LoginResult lr = LitJson.JsonMapper.ToObject<LoginResult> (res);
-		user.id = lr.data.info.id;
-		user.secretKey = lr.data.info.secret_key;
-		user.userGroup = lr.data.info.user_group;
-		user.userLevel = lr.data.info.user_level;
-		user.avaiableCoin = lr.data.info.available_coin;
-		user.pendingCoin = lr.data.info.pending_coin;
-		user.createdTime = lr.data.info.created_time;
-		user.updateTime = lr.data.info.update_time;
-		loginPopup.GetComponent<RequestStatus> ().onSuccess ("Đăng nhập thành công !!!");
-		im.refresh ();
-		//Update FCM token=========================================================
-		updateFCMToken ();
+		try{					
+			LoginResult lr = LitJson.JsonMapper.ToObject<LoginResult> (res);
+			user.id = lr.data.info.id;
+			user.secretKey = lr.data.info.secret_key;
+			user.userGroup = lr.data.info.user_group;
+			user.userLevel = lr.data.info.user_level;
+			user.avaiableCoin = lr.data.info.available_coin;
+			user.pendingCoin = lr.data.info.pending_coin;
+			user.createdTime = lr.data.info.created_time;
+			user.updateTime = lr.data.info.update_time;
+			if (loginPopup != null) {
+				loginPopup.GetComponent<RequestStatus> ().onSuccess ("Đăng nhập thành công !!!");
+			}
+			if (im != null) {
+				im.refresh ();
+			}
+			//Update FCM token=========================================================
+			updateFCMToken ();
 
-		PlayerPrefs.SetString ("USER", LitJson.JsonMapper.ToJson (user));
-		Debug.Log ( LitJson.JsonMapper.ToJson (user));
-		uiController.logonScreen.SetActive (true);
-		uiController.firstScreen.SetActive (false);
-		uiController.notificationNumber.text = lr.data.getUnreadNotifi ().ToString ();
-		loged = true;
+			PlayerPrefs.SetString ("USER", LitJson.JsonMapper.ToJson (user));
+			Debug.Log ( LitJson.JsonMapper.ToJson (user));
+			if (uiController != null) {
+				uiController.logonScreen.SetActive (true);
+				uiController.firstScreen.SetActive (false);
+				uiController.notificationNumber.text = lr.data.getUnreadNotifi ().ToString ();
+			}
+			loged = true;
+			if (PlayerPrefs.GetInt ("COINWAITTOADD") > 0) {
+				addCoin ();
+			}
+		}catch(Exception ex){
+			Debug.LogError (ex.Message);
+			PlayerPrefs.DeleteKey ("USER");
+			onLoginFailed ("");
+		}
 	}
 
 	void onLoginFailed(string res){
-		Debug.Log (res);
-		loginPopup.GetComponent<RequestStatus> ().onFail ("Đăng nhập thất bại !");
+		if (PlayerPrefs.HasKey ("USER")) {
+			loginPopup.GetComponent<RequestStatus> ().tryAgain = autoLogin;
+		} else {
+			loginPopup.GetComponent<RequestStatus> ().tryAgain = firstLogin;
+		}
+		if (im != null) {
+			loginPopup.GetComponent<RequestStatus> ().onFail ("Đăng nhập thất bại !");
+		}
 	}
 
 	public void addCoin(){
@@ -144,7 +174,26 @@ public class Player : MonoBehaviour {
 			//Debug.Log("The MD5 hash of " + source + " is: " + key + ".");		
         }
 		data.data.Add ("key", key);
-		StartCoroutine (doAPI (data.toString(), null, null));
+		StartCoroutine (doAPI (data.toString(), onAddCoinSuccess, null));
+	}
+
+	void onAddCoinSuccess(string res){
+		Debug.Log ("========" + res);
+		try{
+			JsonData data = JsonMapper.ToObject(res);
+			if(bool.Parse(data["status"].ToString())){
+				if(PlayerPrefs.GetInt("COINWAITTOADD") > 0){
+					PlayerPrefs.SetInt("COINWAITTOADD", PlayerPrefs.GetInt("COINWAITTOADD") - 1);
+				}
+
+				if(PlayerPrefs.GetInt("COINWAITTOADD") > 0){
+					addCoin();
+				}
+			}
+			Debug.Log("add coin success");
+		}catch(Exception ex){
+			Debug.Log (ex.Message);
+		}
 	}
 
 	public void updateFCMToken(){
@@ -200,8 +249,11 @@ public class Player : MonoBehaviour {
 
 	}
 
-	public void playGame(){
-		Application.LoadLevel (1);
+	public void playGame(bool resetErnMoney){
+		SceneManager.LoadScene (1);
+		if (resetErnMoney) {
+			PlayerPrefs.SetInt ("CANERNMONEY", 0);
+		}
 	}
 
 }

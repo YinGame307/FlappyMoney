@@ -4,24 +4,38 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class FireBaseHandler : MonoBehaviour {
-	public Text log;
-
-	public void Start() {
-
-		//log.text += "====" + IsPlayServicesAvailable ();
+	void Start() {
+		Firebase.Messaging.FirebaseMessaging.Subscribe("/topics/news");
 		Firebase.Messaging.FirebaseMessaging.TokenReceived += OnTokenReceived;
 		Firebase.Messaging.FirebaseMessaging.MessageReceived += OnMessageReceived;
 	}
+	public GameObject gift;
+	public InboxManager iM;
 
 	public void OnTokenReceived(object sender, Firebase.Messaging.TokenReceivedEventArgs token) {
 	  	UnityEngine.Debug.Log("Received Registration Token: " + token.Token);
-		Player.ins.setFCMToken (token.Token);
-		//log.text += "Received Registration Token: " + token.Token;
+		Player.ins.setFCMToken (token.Token);	
+		PlayerPrefs.SetString ("FCMTOKEN", token.Token);
 	}
 
 	public void OnMessageReceived(object sender, Firebase.Messaging.MessageReceivedEventArgs e) {
-		UnityEngine.Debug.Log ("Received a new message from: " + e.Message);
-		//log.text += "Received a new message from: " + e.Message.ToString();
+		UnityEngine.Debug.Log("Received a new message");
+		if (e.Message.From.Length > 0)
+			UnityEngine.Debug.Log("from: " + e.Message.From);
+		if (e.Message.Data.Count > 0) {
+			if (e.Message.Data.ContainsKey ("action")) {
+				SoundManager.ins.playNotifi ();
+				if (e.Message.Data ["action"].Equals ("received-coin")) {
+					gift.SetActive (true);
+					Time.timeScale = 0;
+					if (gift != null) {
+						gift.SetActive (true);
+					}
+				} else {
+					iM.refresh ();
+				}
+			}
+		}
 	}
 
 	 public int IsPlayServicesAvailable()

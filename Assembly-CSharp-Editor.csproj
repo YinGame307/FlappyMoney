@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_1;UNITY_5_6;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_ANDROID;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_VR;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;UNITY_HAS_GOOGLEVR;ENABLE_DUCK_TYPING</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_5_6_1;UNITY_5_6;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;ENABLE_VIDEO;UNITY_ANDROID;ENABLE_SUBSTANCE;UNITY_ANDROID_API;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_VR;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE;UNITY_HAS_GOOGLEVR;ENABLE_DUCK_TYPING</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -46,33 +46,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Facebook\Editor\FacebookBuild.cs" />
-     <Compile Include="Assets\Facebook\Editor\FacebookPostprocess.cs" />
-     <Compile Include="Assets\Facebook\Editor\FacebookSettingsEditor.cs" />
-     <Compile Include="Assets\Facebook\Editor\Utility.cs" />
-     <Compile Include="Assets\Facebook\Editor\android\FacebookAndroidUtil.cs" />
-     <Compile Include="Assets\Facebook\Editor\android\ManifestMod.cs" />
-     <Compile Include="Assets\Facebook\Editor\iOS\FixupFiles.cs" />
-     <Compile Include="Assets\Facebook\Editor\iOS\PListDict.cs" />
-     <Compile Include="Assets\Facebook\Editor\iOS\PListParser.cs" />
-     <Compile Include="Assets\Facebook\Firebase\Editor\AppDeps.cs" />
-     <Compile Include="Assets\Facebook\Firebase\Editor\MessagingDeps.cs" />
+     <Compile Include="Assets\Firebase\Editor\AppDeps.cs" />
+     <Compile Include="Assets\Firebase\Editor\MessagingDeps.cs" />
      <Compile Include="Assets\GoogleMobileAds\Editor\AdMobDependencies.cs" />
      <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver_v1.2.29.0.txt" />
      <None Include="Assets\Flappy Bird Style\_ReadMe.txt" />
-     <None Include="Assets\Facebook\Firebase\Plugins\link.xml" />
+     <None Include="Assets\Firebase\Plugins\link.xml" />
+     <None Include="Assets\Plugins\Android\firebase-messaging-unity-4.0.1\R.txt" />
      <None Include="Assets\Plugins\Android\Firebase\res\values\google-services.xml" />
      <None Include="Assets\Plugins\Android\Firebase\AndroidManifest.xml" />
-     <None Include="Assets\Plugins\Android\firebase-iid-11.0.0\AndroidManifest.xml" />
-     <None Include="Assets\Plugins\Android\firebase-common-11.0.0\AndroidManifest.xml" />
+     <None Include="Assets\Plugins\Android\firebase-iid-11.0.2\AndroidManifest.xml" />
      <None Include="Assets\PlayServicesResolver\proguard-unity.txt" />
-     <None Include="Assets\Facebook\Firebase\m2repository\com\google\firebase\firebase-messaging-unity\maven-metadata.xml" />
+     <None Include="Assets\Plugins\Android\firebase-messaging-unity-4.0.1\proguard.txt" />
+     <None Include="Assets\Plugins\Android\firebase-messaging-unity-4.0.1\AndroidManifest.xml" />
+     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-messaging-unity\maven-metadata.xml" />
      <None Include="Assets\Firebase\Editor\FirebaseMessaging_v4.0.1_manifest.txt" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
-     <None Include="Assets\Facebook\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
+     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
      <None Include="Assets\Plugins\Android\GoogleMobileAdsPlugin\AndroidManifest.xml" />
-     <None Include="Assets\Facebook\Firebase\Editor\FirebaseMessaging.txt" />
-     <None Include="Assets\Facebook\Scripts\Canvas\Resources\JSSDKBindings.txt" />
+     <None Include="Assets\Plugins\Android\firebase-common-11.0.2\AndroidManifest.xml" />
+     <None Include="Assets\FacebookSDK\link.xml" />
      <None Include="Assets\PlayServicesResolver\proguard-messaging-workaround.txt" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>E:/Unity56/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -134,23 +127,32 @@
  <Reference Include="LitJson">
  <HintPath>E:/SETUP/FlappyMoney/Assets/LitJson.dll</HintPath>
  </Reference>
+ <Reference Include="Facebook.Unity">
+ <HintPath>E:/SETUP/FlappyMoney/Assets/FacebookSDK/Plugins/Facebook.Unity.dll</HintPath>
+ </Reference>
+ <Reference Include="Facebook.Unity.Editor">
+ <HintPath>E:/SETUP/FlappyMoney/Assets/FacebookSDK/Plugins/Editor/Facebook.Unity.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Facebook.Unity.Settings">
+ <HintPath>E:/SETUP/FlappyMoney/Assets/FacebookSDK/Plugins/Settings/Facebook.Unity.Settings.dll</HintPath>
+ </Reference>
  <Reference Include="Firebase.Editor">
- <HintPath>E:/SETUP/FlappyMoney/Assets/Facebook/Firebase/Editor/Firebase.Editor.dll</HintPath>
+ <HintPath>E:/SETUP/FlappyMoney/Assets/Firebase/Editor/Firebase.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.App">
- <HintPath>E:/SETUP/FlappyMoney/Assets/Facebook/Firebase/Plugins/Firebase.App.dll</HintPath>
+ <HintPath>E:/SETUP/FlappyMoney/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.Messaging">
- <HintPath>E:/SETUP/FlappyMoney/Assets/Facebook/Firebase/Plugins/Firebase.Messaging.dll</HintPath>
+ <HintPath>E:/SETUP/FlappyMoney/Assets/Firebase/Plugins/Firebase.Messaging.dll</HintPath>
  </Reference>
  <Reference Include="Google.MiniJson">
- <HintPath>E:/SETUP/FlappyMoney/Assets/Facebook/Firebase/Plugins/Google.MiniJson.dll</HintPath>
+ <HintPath>E:/SETUP/FlappyMoney/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Compat">
- <HintPath>E:/SETUP/FlappyMoney/Assets/Facebook/Firebase/Plugins/Unity.Compat.dll</HintPath>
+ <HintPath>E:/SETUP/FlappyMoney/Assets/Firebase/Plugins/Unity.Compat.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Tasks">
- <HintPath>E:/SETUP/FlappyMoney/Assets/Facebook/Firebase/Plugins/Unity.Tasks.dll</HintPath>
+ <HintPath>E:/SETUP/FlappyMoney/Assets/Firebase/Plugins/Unity.Tasks.dll</HintPath>
  </Reference>
  <Reference Include="Google.IOSResolver_v1.2.29.0">
  <HintPath>E:/SETUP/FlappyMoney/Assets/PlayServicesResolver/Editor/Google.IOSResolver_v1.2.29.0.dll</HintPath>
@@ -160,6 +162,21 @@
  </Reference>
  <Reference Include="Google.VersionHandler_v1.2.29.0">
  <HintPath>E:/SETUP/FlappyMoney/Assets/PlayServicesResolver/Editor/Google.VersionHandler_v1.2.29.0.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>E:/SETUP/FlappyMoney/Assets/Yin-Package/lib/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>E:/SETUP/FlappyMoney/Assets/Yin-Package/lib/Demigiant/DOTween/DOTween43.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>E:/SETUP/FlappyMoney/Assets/Yin-Package/lib/Demigiant/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>E:/SETUP/FlappyMoney/Assets/Yin-Package/lib/Demigiant/DOTween/DOTween50.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTweenEditor">
+ <HintPath>E:/SETUP/FlappyMoney/Assets/Yin-Package/lib/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

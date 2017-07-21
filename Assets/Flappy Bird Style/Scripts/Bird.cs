@@ -55,12 +55,15 @@ public class Bird : MonoBehaviour
 		// Zero out the bird's velocity
 		rb2d.velocity = Vector2.zero;
 		// If the bird collides with something set it to dead...
-		isDead = true;
+		if (!isDead) {
+			isDead = true;
+			SoundManager.ins.playCrash ();
+		}
+
 		//...tell the Animator about it...
 		anim.SetTrigger ("Die");
 		//...and tell the game control about it.
 		GameControl.instance.BirdDied ();
-		GoogleAdmob.admob.ShowInterstitial ();
-		SoundManager.ins.playCrash ();
+
 	}
 }

@@ -17,21 +17,24 @@ public class FBHelper : MonoBehaviour {
 
 	public GameObject loginFBBtn;
 	public UIController uiController;
+	public bool checkLogin;
 	// Use this for initialization
 	void Start ()
 	{
-		PlayerPrefs.DeleteAll ();
-		if (!Player.loged) {
-			if (PlayerPrefs.HasKey ("USER")) {
-				Player.ins.autoLogin ();
-				//loginFBBtn.SetActive (false);
-				//return;
+		Debug.Log (checkLogin);
+		if(checkLogin){
+			if (!Player.loged) {
+				if (PlayerPrefs.HasKey ("USER")) {
+					Player.ins.autoLogin ();
+					//loginFBBtn.SetActive (false);
+					//return;
+				} else {
+					//loginFBBtn.SetActive (true);
+				}
 			} else {
-				//loginFBBtn.SetActive (true);
+				uiController.firstScreen.SetActive (false);
+				uiController.logonScreen.SetActive (true);
 			}
-		} else {
-			uiController.firstScreen.SetActive (false);
-			uiController.logonScreen.SetActive (true);
 		}
 		ins = this;
 		if (!FB.IsInitialized) {

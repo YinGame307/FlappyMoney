@@ -9,5 +9,8 @@ EditorBuildSettings:
     path: Assets/Flappy Bird Style/_Scenes/MainMenu.unity
     guid: a49a65892366f634bafad6abc4c41a43
   - enabled: 1
-    path: Assets/Flappy Bird Style/_Scenes/Main.unity
-    guid: ab8ef5f57c6f04e42880b8b05e8278f8
+    path: Assets/loading.unity
+    guid: 053d9f921eb7f054183ecdbfbc0800f1
+  - enabled: 1
+    path: Assets/Flappy Bird Style/_Scenes/Main 1.unity
+    guid: faba6ebc8e975254c801be2336d2ce4c
